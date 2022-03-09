@@ -53,5 +53,15 @@ RSpec.describe 'Greeter' do
 
         expect(greeting).to eq 'Good night Kenny'
     end
+
+    it "greet logs into console each time it is called" do
+        test_time = Time.parse('1am')
+        greeter = Greeter.new(test_time)
+
+        expect do
+          greeting = greeter.greet('Kenny')
+        end.to output('Good night Kenny').to_stdout
+
+    end
 end
 end

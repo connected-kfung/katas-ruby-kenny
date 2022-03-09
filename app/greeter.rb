@@ -6,13 +6,19 @@ class Greeter
   def greet(name)
     formatted_name = name.strip.capitalize
 
-    if morning?
-      return "Good morning #{formatted_name}"
+    greeting = if morning?
+      "Good morning #{formatted_name}"
     elsif evening?
-      return "Good evening #{formatted_name}"
+      "Good evening #{formatted_name}"
+    elsif night?
+      "Good night #{formatted_name}"
     else
-      return "Hello #{formatted_name}"
+      "Hello #{formatted_name}"
     end
+
+    print greeting
+
+    greeting
   end
 
   private
@@ -29,5 +35,12 @@ class Greeter
     ten_pm = Time.parse('10pm')
 
     @time_of_day && @time_of_day > six_pm && @time_of_day < ten_pm
+  end
+
+  def night?
+    ten_pm = Time.parse('10pm')
+    six_am = Time.parse('6am')
+
+    @time_of_day && (@time_of_day > ten_pm || @time_of_day < six_am)
   end
 end
